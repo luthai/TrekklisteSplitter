@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using PdfSharp;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
+using System.Diagnostics;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using System.IO;
 
 namespace TrekklisterSplitter
 {
@@ -45,18 +46,9 @@ namespace TrekklisterSplitter
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            PdfDocument inputDocument = PdfReader.Open(txtSourceFile.Text, PdfDocumentOpenMode.Import);
+           
 
-            PdfDocument outputDocument = new PdfDocument();
-
-            outputDocument.Version = inputDocument.Version;
-            outputDocument.Info.Title = String.Format("Page {0} of {1}", 2, inputDocument.Info.Title);
-            outputDocument.Info.Creator = inputDocument.Info.Creator;
-
-            outputDocument.AddPage(inputDocument.Pages[0]);
-            outputDocument.AddPage(inputDocument.Pages[1]);
-            outputDocument.AddPage(inputDocument.Pages[2]);
-            outputDocument.Save(String.Format("{0}.pdf", "Testfile"));
         }
+        
     }
 }
