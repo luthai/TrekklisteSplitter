@@ -58,32 +58,34 @@ namespace TrekklisterSplitter
 
             try
             {
-                // Intialize a new PdfReader instance with the contents of the source Pdf file
-                reader = new PdfReader(sourcePdfPath);
+                List<int> pages = new List<int>();
+                pages = ReadPdfFile(sourcePdfPath, "Leverandør 56000");
 
-                // Capture the correct size and orientation for the page
-                sourceDocument = new Document(reader.GetPageSizeWithRotation(pageNumber));
+                if (pages.Count != 0)
+                {
+                    // Intialize a new PdfReader instance with the contents of the source Pdf file
+                    reader = new PdfReader(sourcePdfPath);
 
-                // Initialize an instance of the PdfCopyClass with the source 
-                // document and an output file stream
-                pdfCopyProvider = new PdfCopy(sourceDocument,
-                    new System.IO.FileStream(outputPdfPath, System.IO.FileMode.Create));
+                    // Capture the correct size and orientation for the page
+                    sourceDocument = new Document(reader.GetPageSizeWithRotation(pageNumber));
 
-                sourceDocument.Open();
+                    // Initialize an instance of the PdfCopyClass with the source 
+                    // document and an output file stream
+                    pdfCopyProvider = new PdfCopy(sourceDocument,
+                        new System.IO.FileStream(outputPdfPath, System.IO.FileMode.Create));
 
-                // Extract the desired page number
-                importedPage = pdfCopyProvider.GetImportedPage(reader, 1);
-                pdfCopyProvider.AddPage(importedPage);
+                    sourceDocument.Open();
 
-                importedPage = pdfCopyProvider.GetImportedPage(reader, 2);
-                pdfCopyProvider.AddPage(importedPage);
+                    for (int idx = 0; idx < pages.Count; ++idx)
+                    {
+                        // Extract the desired page number
+                        importedPage = pdfCopyProvider.GetImportedPage(reader, pages[idx]);
+                        pdfCopyProvider.AddPage(importedPage);
+                    }
 
-                importedPage = pdfCopyProvider.GetImportedPage(reader, 3);
-                pdfCopyProvider.AddPage(importedPage);
-
-
-                sourceDocument.Close();
-                reader.Close();
+                    sourceDocument.Close();
+                    reader.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -91,6 +93,27 @@ namespace TrekklisterSplitter
                 throw ex;
             }
 
+        }
+
+        public List<int> ReadPdfFile(string sourceFileName, string searchText)
+        {
+            List<int> pages = new List<int>();
+            if (File.Exists(sourceFileName))
+            {
+                PdfReader pdfReader = new PdfReader(sourceFileName);
+                for (int i = 1; i < pdfReader.NumberOfPages; ++i)
+                {
+                    ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                    string currentPageText = PdfTextExtractor.GetTextFromPage(pdfReader, i, strategy);
+                    if (currentPageText.Contains(searchText))
+                    {
+                        pages.Add(i);
+                    }
+                }
+                pdfReader.Close();
+            }
+
+            return pages;
         }
         
     }
