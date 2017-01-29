@@ -47,9 +47,23 @@ namespace TrekklisterSplitter
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            // Source file path
             string sourcePdfPath = txtSourceFile.Text;
-            string outputPdfPath = @"C:\Users\Thai\Desktop\TrekklisterSplit Testdata - Copy\ex\test.pdf";
-            int pageNumber = 3;
+
+            // Output file path
+            string currentMonth = DateTime.Now.ToString("MMMMM");
+            string outputFolderName = "Trekklister " + currentMonth;
+            string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string outputPdfFolder = System.IO.Path.Combine(pathDesktop, outputFolderName);
+            System.IO.Directory.CreateDirectory(outputPdfFolder);
+            string extension = ".pdf";
+            string mfo = "mfo";
+            string outputPdfPath = System.IO.Path.Combine(outputPdfFolder, mfo) + extension;
+
+            Console.WriteLine(outputPdfPath);
+
+            // Starting page number
+            int pageNumber = 1;
 
             PdfReader reader = null;
             Document sourceDocument = null;
