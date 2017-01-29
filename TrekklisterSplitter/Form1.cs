@@ -57,13 +57,30 @@ namespace TrekklisterSplitter
             string outputPdfFolder = System.IO.Path.Combine(pathDesktop, outputFolderName);
             System.IO.Directory.CreateDirectory(outputPdfFolder);
             string extension = ".pdf";
-            string mfo = "mfo";
-            string outputPdfPath = System.IO.Path.Combine(outputPdfFolder, mfo) + extension;
-
-            Console.WriteLine(outputPdfPath);
+            string outputPdfPath = string.Empty;
 
             // Starting page number
             int pageNumber = 1;
+
+            string[,] arrayLeverandor = new string[16, 2] 
+            {   
+                {"Leverandør 56000", "MFO " + currentMonth.ToLower() + " trekklister"}, 
+                {"Leverandør 56001", "Skolenes "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56002", "FO "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56004", "Delta "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56006", "Akademikerforbundet "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56007", "Bibforb "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56009", "Ergoterapeutene "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56013", "NITO "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56019", "Elogit "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56022", "Espen Frankmoen "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56024", "Forskerforbundet "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56190", "Skolelederforbundet "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 56300", "Parat "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57648", "Svea "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57666", "Bidragstrekk "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57726", "NAVI "  + currentMonth.ToLower() + " trekklister"},
+            };
 
             PdfReader reader = null;
             Document sourceDocument = null;
@@ -72,41 +89,50 @@ namespace TrekklisterSplitter
 
             try
             {
-                List<int> pages = new List<int>();
-                pages = ReadPdfFile(sourcePdfPath, "Leverandør 56000");
+                // Intialize a new PdfReader instance with the contents of the source Pdf file
+                reader = new PdfReader(sourcePdfPath);
 
-                if (pages.Count != 0)
+                // Capture the correct size and orientation for the page
+                sourceDocument = new Document(reader.GetPageSizeWithRotation(pageNumber));
+
+                for (int i = 0; i < arrayLeverandor.GetLength(0); ++i)
                 {
-                    // Intialize a new PdfReader instance with the contents of the source Pdf file
-                    reader = new PdfReader(sourcePdfPath);
+                    List<int> pages = new List<int>();
+                    pages = ReadPdfFile(sourcePdfPath, arrayLeverandor[i, 0]);
 
-                    // Capture the correct size and orientation for the page
-                    sourceDocument = new Document(reader.GetPageSizeWithRotation(pageNumber));
-
-                    // Initialize an instance of the PdfCopyClass with the source 
-                    // document and an output file stream
-                    pdfCopyProvider = new PdfCopy(sourceDocument,
-                        new System.IO.FileStream(outputPdfPath, System.IO.FileMode.Create));
-
-                    sourceDocument.Open();
-
-                    for (int idx = 0; idx < pages.Count; ++idx)
+                    for (int j = 0; j < arrayLeverandor.GetLength(1); ++j)
                     {
-                        // Extract the desired page number
-                        importedPage = pdfCopyProvider.GetImportedPage(reader, pages[idx]);
-                        pdfCopyProvider.AddPage(importedPage);
+                        outputPdfPath = System.IO.Path.Combine(outputPdfFolder, arrayLeverandor[i, j]) + extension;
                     }
 
-                    sourceDocument.Close();
-                    reader.Close();
+                    if (pages.Count != 0)
+                    {
+                        // Initialize an instance of the PdfCopyClass with the source 
+                        // document and an output file stream
+                        pdfCopyProvider = new PdfCopy(sourceDocument,
+                            new System.IO.FileStream(outputPdfPath, System.IO.FileMode.Create));
+
+                        sourceDocument.Open();
+
+                        for (int idx = 0; idx < pages.Count; ++idx)
+                        {
+                            // Extract the desired page number
+                            importedPage = pdfCopyProvider.GetImportedPage(reader, pages[idx]);
+                            pdfCopyProvider.AddPage(importedPage);
+                        }
+                    }
                 }
+
+                sourceDocument.Close();
+                reader.Close();
+
+                System.Windows.Forms.MessageBox.Show("Trekkliste ferdig splittet!!!");
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine(ex.Message);
                 throw ex;
             }
-
         }
 
         public List<int> ReadPdfFile(string sourceFileName, string searchText)
