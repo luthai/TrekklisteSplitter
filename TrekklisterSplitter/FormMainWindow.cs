@@ -154,7 +154,7 @@ namespace TrekklisterSplitter
             if (File.Exists(sourceFileName))
             {
                 PdfReader pdfReader = new PdfReader(sourceFileName);
-                for (int i = 1; i < pdfReader.NumberOfPages; ++i)
+                for (int i = 1; i < pdfReader.NumberOfPages + 1; ++i)
                 {
                     ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
                     string currentPageText = PdfTextExtractor.GetTextFromPage(pdfReader, i, strategy);
