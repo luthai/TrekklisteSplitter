@@ -8,7 +8,9 @@ namespace TrekklisterSplitter
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// TrekklisterSplitter for å splitte pdf filen 
+        /// til ulike fagforeninger.
+        /// Laget av Luan Thanh Thai
         /// </summary>
         [STAThread]
         static void Main()
