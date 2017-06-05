@@ -9,7 +9,7 @@ namespace TrekklisterSplitter
     {
         /// <summary>
         /// TrekklisterSplitter for å splitte pdf filen 
-        /// til ulike fagforeninger.
+        /// til ulike fagforeninger og kreditorer
         /// Laget av Luan Thanh Thai
         /// </summary>
         [STAThread]

@@ -38,7 +38,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(218, 110);
+            this.btnStart.Location = new System.Drawing.Point(217, 93);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(299, 110);
+            this.btnCancel.Location = new System.Drawing.Point(298, 93);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             this.lblFil.AutoSize = true;
             this.lblFil.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFil.Location = new System.Drawing.Point(31, 57);
+            this.lblFil.Location = new System.Drawing.Point(30, 40);
             this.lblFil.Name = "lblFil";
             this.lblFil.Size = new System.Drawing.Size(25, 16);
             this.lblFil.TabIndex = 2;
@@ -68,7 +68,7 @@
             // 
             // txtSourceFile
             // 
-            this.txtSourceFile.Location = new System.Drawing.Point(62, 56);
+            this.txtSourceFile.Location = new System.Drawing.Point(61, 39);
             this.txtSourceFile.Name = "txtSourceFile";
             this.txtSourceFile.Size = new System.Drawing.Size(313, 20);
             this.txtSourceFile.TabIndex = 3;
@@ -77,7 +77,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Image = ((System.Drawing.Image)(resources.GetObject("btnBrowse.Image")));
-            this.btnBrowse.Location = new System.Drawing.Point(381, 54);
+            this.btnBrowse.Location = new System.Drawing.Point(380, 37);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(33, 22);
             this.btnBrowse.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 164);
+            this.ClientSize = new System.Drawing.Size(445, 140);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtSourceFile);
             this.Controls.Add(this.lblFil);

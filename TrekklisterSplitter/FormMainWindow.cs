@@ -71,7 +71,7 @@ namespace TrekklisterSplitter
             // Starting page number
             int pageNumber = 1;
 
-            string[,] arrayLeverandor = new string[16, 2] 
+            string[,] arrayLeverandor = new string[36, 2] 
             {   
                 {"Leverandør 56000", "MFO " + currentMonth.ToLower() + " trekklister"}, 
                 {"Leverandør 56001", "Skolenes "  + currentMonth.ToLower() + " trekklister"},
@@ -86,9 +86,29 @@ namespace TrekklisterSplitter
                 {"Leverandør 56024", "Forskerforbundet "  + currentMonth.ToLower() + " trekklister"},
                 {"Leverandør 56190", "Skolelederforbundet "  + currentMonth.ToLower() + " trekklister"},
                 {"Leverandør 56300", "Parat "  + currentMonth.ToLower() + " trekklister"},
-                {"Leverandør 57648", "Svea "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57559", "Conecto Østerås "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57600", "Dalh Inkasso "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57641", "Kreditorforeningen "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57643", "Visma Collectors "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57648", "Svea Finans "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57655", "Lindorff "  + currentMonth.ToLower() + " trekklister"},
                 {"Leverandør 57666", "Bidragstrekk "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57706", "Kredittgjenvinning "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57712", "SI "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57716", "Lindorff Obligations "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57717", "Kredinor Oslo "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57719", "Skrankred "  + currentMonth.ToLower() + " trekklister"},
                 {"Leverandør 57726", "NAVI "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57727", "Credicare "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57728", "Ringsaker kommune "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57740", "PRA "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57744", "Skatt Øst "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57746", "Melin Collectors "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57747", "AHSD "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57748", "Eurocard "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57756", "Sergel Norge "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57757", "Conecto Hamar "  + currentMonth.ToLower() + " trekklister"},
+                {"Leverandør 57775", "Intrum Justitia "  + currentMonth.ToLower() + " trekklister"}
             };
 
             PdfReader reader = null;
